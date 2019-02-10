@@ -10,22 +10,24 @@
     android:paddingTop="70dp"
     tools:context="net.starkadder.MainActivity">
 
-    <TextView
-        android:id="@+id/message"
-       android:layout_centerHorizontal="true"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:gravity="center"
-       android:text="Radio Free Blossom" />
-
-    <Button
-        android:id="@+id/audioStreamBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/message"
-        android:layout_marginTop="70dp"
-        android:textSize="18sp"
-        android:text="Launch Streaming"
-        android:layout_centerHorizontal="true"/>
-
+  <TextView
+     android:id="@+id/message"
+     android:layout_centerHorizontal="true"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:maxLines="10" 
+     android:maxLength="1000" 
+     android:gravity="center"
+     android:text="Radio Free Blossom" />
+  
+  <Button
+     android:id="@+id/audioStreamBtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_below="@id/message"
+     android:layout_marginTop="70dp"
+     android:textSize="18sp"
+     android:text="Launch Streaming"
+     android:layout_centerHorizontal="true"/>
+  
 </RelativeLayout>
