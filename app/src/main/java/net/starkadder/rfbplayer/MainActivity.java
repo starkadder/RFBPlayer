@@ -32,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         progressDialog = new ProgressDialog(this);
         btn = (Button) findViewById(R.id.audioStreamBtn);
-        rfbweb =  new RFBWebserver();
-        new Server().execute();
+
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        new Player().execute("http://edna/test.mp3");
+
+        rfbweb =  new RFBWebserver(mediaPlayer);
+        new Server().execute();
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     btn.setText("Pause Streaming");
 
                     if (initialStage) {
-                        new Player().execute("http://edna/test.mp3");
+        //                new Player().execute("http://edna/test.mp3");
                     } else {
                         if (!mediaPlayer.isPlaying())
                             mediaPlayer.start();

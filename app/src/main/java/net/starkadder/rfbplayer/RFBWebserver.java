@@ -1,5 +1,6 @@
 package net.starkadder.rfbplayer;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 
 import java.io.BufferedOutputStream;
@@ -22,16 +23,15 @@ public class RFBWebserver implements Runnable {
     static final String DEFAULT_FILE = "index.html";
     static final String FILE_NOT_FOUND = "404.html";
     static final String METHOD_NOT_SUPPORTED = "not_supported.html";
-    // port to listen connection
     static final int PORT = 8080;
-
-    // verbose mode
-    static final boolean verbose = true;
-
-    // Client Connection via Socket Class
+    static final boolean verbose = false;
     private Socket connect;
+    private MediaPlayer player;
 
-    public RFBWebserver() {}
+
+    public RFBWebserver(MediaPlayer p) {
+        player = p;
+    }
     public RFBWebserver(Socket c) {
         connect = c;
     }
@@ -40,21 +40,16 @@ public class RFBWebserver implements Runnable {
         try {
             ServerSocket serverConnect = new ServerSocket(PORT);
             Log.i("RFBPlayer", "Listening for connections on port: " + PORT );
-
-
             // we listen until user halts server execution
             while (true) {
                 RFBWebserver myServer = new RFBWebserver(serverConnect.accept());
-
                 if (verbose) {
                     System.out.println("Connecton opened. (" + new Date() + ")");
                 }
-
                 // create dedicated thread to manage the client connection
                 Thread thread = new Thread(myServer);
                 thread.start();
             }
-
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Server Connection error : " + e.getMessage());
